@@ -8,4 +8,8 @@ app.get("/", function(req, res) {
 	res.render("circles");	
 });
 
+app.get("/*", function(req, res) {
+	res.redirect("/");	
+});
+
 app.listen(process.env.PORT, process.env.IP);
