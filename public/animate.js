@@ -170,7 +170,7 @@ var data = {
 	    dy: 0
 	});
 
-	// wheneer a key is pressed
+	// whenever a key is pressed
 	function onKeyDown(event) {
 		// draw circles and play apporopriate sound file
 		if (data[event.key]) {
@@ -194,15 +194,21 @@ var data = {
 
 	// animation
 	function onFrame() {
-		text.position += new Point(0, text.dy);
+		if (text) {
+			text.position += new Point(0, text.dy);
+		}
 		for (var i = 0; i < circles.length; i++) {
 			circles[i].fillColor.hue += 1;
-			circles[i].scale(.9); 
+			circles[i].scale(0.9); 
 
 			if (circles[i].area < 1) {
 				circles[i].remove();
 				circles.splice(i, 1);
 				i--;
+			}
+			
+			if (text && text.position.y > view.size.height) {
+				text = null;
 			} 
 		}
 	}
