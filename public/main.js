@@ -1,3 +1,5 @@
+var bandw = false;
+
 var data = {
 		q: {
 			sound: new Howl({
@@ -157,58 +159,71 @@ var data = {
 		}
 	};
 
-	var circles = [];
-	
-	var text = new PointText({
-	    point: view.center,
-	    justification: 'center',
-	    content: 'press a key',
-	    fillColor: new Color(0, 0.8),
-	    fontFamily: 'Bai Jamjuree',
-	    fontWeight: 'normal',
-	    fontSize: 36,
-	    dy: 0
-	});
+var circles = [];
 
-	// whenever a key is pressed
-	function onKeyDown(event) {
-		// draw circles and play apporopriate sound file
-		if (data[event.key]) {
-			// move text up
-			text.dy += -2;
-			text.fontSize += -5;
-			text.content = "keep it up!";
-			
-			var maxPoint = new Point(view.size.width, view.size.height);
-			var randomPoint = Point.random();
-			var point = maxPoint * randomPoint;
-			
-			var circle = new Path.Circle(point, 300);
+var text = new PointText({
+    point: view.center,
+    justification: 'center',
+    content: 'press a key',
+    fillColor: new Color(0, 0.8),
+    fontFamily: 'Bai Jamjuree',
+    fontWeight: 'bold',
+    fontSize: 36,
+    dy: 0
+});
+
+// whenever a key is pressed
+function onKeyDown(event) {
+	// draw circles and play apporopriate sound file
+	if (data[event.key]) {
+		// move text up
+		text.dy += -2;
+		text.fontSize += -5;
+		text.content = "keep it up!";
+		
+		var maxPoint = new Point(view.size.width, view.size.height);
+		var randomPoint = Point.random();
+		var point = maxPoint * randomPoint;
+		
+		var circle = new Path.Circle(point, 300);
+		
+		if (bandw) {
+			circle.fillColor = "white";
+		} else {
 			circle.fillColor = data[event.key].color;
-
-			data[event.key].sound.play();
-
-			circles.push(circle);
 		}
+	
+		data[event.key].sound.play();
+
+		circles.push(circle);
 	}
+}
 
-	// animation
-	function onFrame() {
-		if (text) {
-			text.position += new Point(0, text.dy);
-		}
-		for (var i = 0; i < circles.length; i++) {
-			circles[i].fillColor.hue += 1;
-			circles[i].scale(0.9); 
-
-			if (circles[i].area < 1) {
-				circles[i].remove();
-				circles.splice(i, 1);
-				i--;
-			}
-			
-			if (text && text.position.y > view.size.height) {
-				text = null;
-			} 
-		}
+// animation
+function onFrame() {
+	if (text) {
+		text.position += new Point(0, text.dy);
+		bandw ? text.fillColor = "white" : text.fillColor = new Color(0, 0.8);
 	}
+	for (var i = 0; i < circles.length; i++) {
+		if (bandw) circles[i].fillColor.hue += 1;
+		circles[i].scale(0.9); 
+
+		if (circles[i].area < 1) {
+			circles[i].remove();
+			circles.splice(i, 1);
+			i--;
+		}
+		
+		if (text && text.position.y > view.size.height) {
+			text = null;
+		} 
+	}
+}
+
+// Handling "bandw" mode
+$("button").click(function() {
+	$("#myCanvas").toggleClass("bandw");
+	$("button").toggleClass("bandw");
+	bandw = !bandw;
+});
