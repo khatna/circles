@@ -43,8 +43,8 @@ button:hover {
 }
 
 #myCanvas {
-	background: #ece9e6;
-    background: -webkit-linear-gradient(to right, #ece9e6, #ffffff);
+	background: #fce9e6;
+    background: -webkit-linear-gradient(to right, #fce9e6, #ffffff);
     background: linear-gradient(to right, #fce9e6, #ffffef);
 	position: fixed;
 	z-index: -1;

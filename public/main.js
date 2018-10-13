@@ -224,6 +224,8 @@ function onFrame() {
 // Handling "bandw" mode
 $("button").click(function() {
 	$("#myCanvas").toggleClass("bandw");
-	$("button").toggleClass("bandw");
+	$(this).toggleClass("bandw");
 	bandw = !bandw;
+	if (bandw) $(this).html("lights on");
+	else       $(this).html("lights off");
 });
