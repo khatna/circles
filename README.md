@@ -12,4 +12,4 @@ to go along with some cool sounds. Also, there's a lights off button, which you 
 [PATATAP](http://www.patatap.com)  
 [HowlerJS](http://www.howlerjs.com)  
 [PaperJS](http://www.paperjs.org)  
-Inspired heavily by Colt Steele's uDemy [course](https://www.udemy.com/the-web-developer-bootcamp/)  
+Inspired by Colt Steele's uDemy [course](https://www.udemy.com/the-web-developer-bootcamp/)  
