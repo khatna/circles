@@ -1,6 +1,7 @@
 var express = require("express");
 var app     = express();
 
+// serving favicon
 var favicon = require('serve-favicon');
 
 app.set("view engine", "ejs");
@@ -11,6 +12,7 @@ app.get("/", function(req, res) {
 	res.render("circles");	
 });
 
+// redirect to main page
 app.get("/*", function(req, res) {
 	res.redirect("/");	
 });
