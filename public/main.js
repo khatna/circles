@@ -206,7 +206,7 @@ function onFrame() {
 		bandw ? text.fillColor = "white" : text.fillColor = new Color(0, 0.8);
 	}
 	for (var i = 0; i < circles.length; i++) {
-		if (bandw) circles[i].fillColor.hue += 1;
+		if (!bandw) circles[i].fillColor.hue += 1;
 		circles[i].scale(0.9); 
 
 		if (circles[i].area < 1) {
